@@ -13,6 +13,10 @@ class Error extends \Exception
             $message = $message[0]->message;
         }
 
+        if (isset($message->title)) {
+            $message = $message->title;
+        }
+
         parent::__construct($message, $code);
     }
 }

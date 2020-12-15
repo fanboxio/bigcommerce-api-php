@@ -50,7 +50,7 @@ class Client
      *
      * @var string
      */
-    private static $path_prefix = '/api/v2';
+    private static $path_prefix = '/api/v3';
 
     /**
      * Full URL path to the configured store API.
@@ -62,7 +62,7 @@ class Client
     private static $store_hash;
     private static $auth_token;
     private static $client_secret;
-    private static $stores_prefix = '/stores/%s/v2';
+    private static $stores_prefix = '/stores/%s/v3/catalog';
     private static $api_url = 'https://api.bigcommerce.com';
     private static $login_url = 'https://login.bigcommerce.com';
 
@@ -2014,7 +2014,7 @@ class Client
      */
     public static function getShippingMethod($zoneId, $methodId)
     {
-        return self::getResource('/shipping/zones/'. $zoneId . '/methods/'. $methodId, 'ShippingMethod');
+        return self::getResource('/shipping/zones/' . $zoneId . '/methods/' . $methodId, 'ShippingMethod');
     }
 
     /**
@@ -2038,7 +2038,7 @@ class Client
      */
     public static function deleteShippingMethod($zoneId, $methodId)
     {
-        return self::deleteResource('/shipping/zones/'. $zoneId . '/methods/'. $methodId);
+        return self::deleteResource('/shipping/zones/' . $zoneId . '/methods/' . $methodId);
     }
 
     /**
@@ -2051,6 +2051,6 @@ class Client
     public static function getSkusByProduct($productId, $filter = array())
     {
         $filter = Filter::create($filter);
-        return self::getCollection('/products/'.$productId.'/skus' . $filter->toQuery(), 'Sku');
+        return self::getCollection('/products/' . $productId . '/skus' . $filter->toQuery(), 'Sku');
     }
 }
