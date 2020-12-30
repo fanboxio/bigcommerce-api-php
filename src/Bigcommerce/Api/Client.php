@@ -341,7 +341,7 @@ class Client
      * Internal method to wrap items in a collection to resource classes.
      *
      * @param string $resource name of the resource class
-     * @param array $object object collection
+     * @param object $object object collection
      * @return array
      */
     private static function mapCollection($resource, $object)
@@ -353,7 +353,10 @@ class Client
         $baseResource = __NAMESPACE__ . '\\' . $resource;
         self::$resource = (class_exists($baseResource)) ? $baseResource : 'Bigcommerce\\Api\\Resources\\' . $resource;
 
-        return array_map(array('self', 'mapCollectionObject'), $object->data);
+        return [
+            'data' => array_map(array('self', 'mapCollectionObject'), $object->data),
+            'meta' => $object->meta
+        ];
     }
 
     /**
